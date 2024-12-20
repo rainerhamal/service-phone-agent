@@ -7,4 +7,4 @@ app = FastAPI()
 
 @app.get("/")
 async def read_foot():
-    return{"message": "Helloo, World!"}
+    return{"message": "Hello, World!"}
