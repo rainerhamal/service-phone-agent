@@ -31,7 +31,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "https://api.retellai.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -98,24 +98,24 @@ async def create_web_call(request: CreateWebCallRequest):
     print(f"Payload: {payload}")
 
     headers = {
-        "Authorization": f"{RETELL_API_KEY}",
+        "Authorization": f"Bearer {RETELL_API_KEY}",
         "Content-Type": "application/json"
     }
 
-    # try:
-    async with httpx.AsyncClient() as client:
-        response = await client.post(
-            "https://api.retellai.com/v2/create-web-call",
-            json=payload,
-            headers=headers
-        )
-    response.raise_for_status()
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                "https://api.retellai.com/v2/create-web-call",
+                json=payload,
+                headers=headers
+            )
+        response.raise_for_status()
 
-    return response.json()
+        return response.json()
     
-    # except httpx.RequestError as e:
-    #     print(f"Request error: {e}")
-    #     raise HTTPException(status_code=400, detail=str(e))
-    # except httpx.HTTPStatusError as e:
-    #     print(f"HTTP error: {e.response.json()}")
-    #     raise HTTPException(status_code=e.response.status_code, detail=str(e))
+    except httpx.RequestError as e:
+        print(f"Request error: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except httpx.HTTPStatusError as e:
+        print(f"HTTP error: {e.response.json()}")
+        raise HTTPException(status_code=e.response.status_code, detail=str(e))
