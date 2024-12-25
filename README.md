@@ -39,12 +39,12 @@ Make sure you have the following installed:
    pip install -r requirements.txt
 5. Create a .env file in the backend directory to store sensitive environment variables. This file will hold your API keys and agent ID.
    ```bash
-   uvicorn main:app --reload
-6. Run the backend server:
-   ```bash
    OPENAI_API_KEY="your_openai_api_key"
    RETELL_API_KEY="your_retell_api_key"
    RETELL_AGENT_ID="your_retell_agent_id"
+6. Run the backend server:
+   ```bash
+   uvicorn main:app --reload
 
 
 ### Frontend Installation
