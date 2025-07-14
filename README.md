@@ -1,7 +1,7 @@
 # Color Bar Phone Agent
 
 ## Overview
-Color Bar Phone Agent is a web-based application built with **FastAPI** for the backend and **Next.js** for the frontend. This application serves as a phone agent system that facilitates web calls and integrates with **RetellAI** for voice and audio processing.
+Service Phone Agent is a web-based application built with **FastAPI** for the backend and **Next.js** for the frontend. This application serves as a phone agent system that facilitates web calls and integrates with **RetellAI** for voice and audio processing.
 
 ## Features
 - **Web Call Integration**: Facilitates creating web calls with external API integration.
