@@ -12,14 +12,14 @@ export default function Home ()
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
-          src="/1F-TCB-Horizontal-Logo-Revised-Premier-Salon-1.png"
+          src="vercel.svg"
           alt="Next.js logo"
           width={ 400 }
           height={ 50 }
           priority
         />
         <p className="items-center text-sm text-center sm:text-center font-[family-name:var(--font-geist-mono)]">
-          Book an Appoitnment with us Now.
+          Book an Appointnment with us Now.
         </p>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
