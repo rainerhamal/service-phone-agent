@@ -1,4 +1,5 @@
 from openai import OpenAI
+from openai.types.chat import ChatCompletionMessageParam
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -67,9 +68,8 @@ class LlmClient:
                     "content": utterance['content']
                 })
         return messages
-
     def prepare_prompt(self, request):
-        prompt = [{
+        prompt: list[ChatCompletionMessageParam] = [{
             "role": "system",
             "content": agentPrompt,
         }]
@@ -93,7 +93,7 @@ class LlmClient:
             ) # type: ignore
 
         for chunk in stream:
-            if chunk.choices[0].delta.get("content"):
+            if chunk.choices[0].delta.content:
                 yield {
                     "response_id": request['response_id'],
                     "content": chunk.choices[0].delta.content,
