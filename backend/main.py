@@ -20,9 +20,10 @@ app = FastAPI()
 
 # app.include_router(calls.router, prefix="/api/v1")
 
-retell = Retell(api_key=os.environ["RETELL_API_KEY"])
+# retell = Retell(api_key=os.environ["RETELL_API_KEY"])
 retell_agent_id = os.environ.get("RETELL_AGENT_ID")
 openai_api_key = os.environ.get("OPENAI_API_KEY")
+retell = os.environ.get("RETELL_API_KEY")
 
 origins = [
     "http://localhost:3000",
@@ -96,6 +97,7 @@ async def create_web_call(request: CreateWebCallRequest):
     }
 
     print(f"Payload: {payload}")
+    print(f"RETELL_API_KEY: {RETELL_API_KEY}")
 
     headers = {
         "Authorization": f"Bearer {RETELL_API_KEY}",

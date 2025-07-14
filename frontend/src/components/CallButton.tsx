@@ -3,16 +3,15 @@ import { RetellWebClient } from "retell-client-js-sdk";
 import { useCallback } from 'react';
 // import Retell from 'retell-sdk';
 
-const agentId = "agent_e2de86c99ddfc8c1306174f7dd";
+const agentId = process.env.NEXT_PUBLIC_AGENT_ID
 interface RegisterCallResponse
     {
         access_token: string;
     }
+const retellWebClient = new RetellWebClient();
 
 export default function CallButton ()
 {
-    const retellWebClient = new RetellWebClient();
-
     const [ isCalling, setIsCalling ] = useState( false );
 
     useEffect( () =>
@@ -75,26 +74,37 @@ export default function CallButton ()
     {
         if ( isCalling )
         {
-            retellWebClient.stopCall();
+            try {
+                await retellWebClient.stopCall();
+                setIsCalling(false);
+            } catch (error) {
+                console.error("Failed to stop call:", error);
+            }
+            
         } else
         {
-            const registerCallResponse = await registerCall( agentId );
-            if ( registerCallResponse?.access_token )
-            {
+            console.log("Agent ID:", agentId);
+            if (!agentId) {
+                console.error("Failed to start call: agentId is undefined.");
+                return;
+            }
+            const registerCallResponse = await registerCall(agentId);
+            if (registerCallResponse?.access_token) {
                 retellWebClient
-                    .startCall( {
+                    .startCall({
                         accessToken: registerCallResponse.access_token,
-                    } )
-                    .catch( console.error );
-                setIsCalling( true ); // Update button to "Stop" when conversation starts
+                    })
+                    .catch(console.error);
+                setIsCalling(true); // Update button to "Stop" when conversation starts
             } else {
-                console.error("Failed to start call: No access token received.")
+                console.error("Failed to start call: No access token received.");
             }
         }
     }, [ isCalling, agentId ]);
 
     const registerCall = useCallback(async (agentId: string) =>
     {
+        console.log("Agent ID in registerCall:", agentId);
         try
         {
             const response = await fetch( 'http://localhost:8000/create-web-call', {
