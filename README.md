@@ -1,12 +1,19 @@
 # Service Phone Agent
 
-This repository contains a full-stack application designed to provide a phone agent service using AI. The project is organized into two main parts: a Python backend and a Next.js/React frontend.
+## Overview
+Service Phone Agent is a full-stack web application that provides an AI-powered phone agent system. It features a Python backend and a modern Next.js frontend, enabling web calls and voice/audio processing through integration with RetellAI.
 
 ## Features
-- AI-powered phone agent logic (backend)
-- Modern web interface (frontend)
-- TypeScript, Tailwind CSS, and Next.js for frontend development
-- Python backend for LLM and custom logic
+- AI-driven phone agent logic (backend)
+- Web call integration with external APIs
+- Modern React/Next.js frontend
+- CORS support for seamless frontend-backend communication
+- RetellAI API integration for voice and audio
+
+## Technologies Used
+- **Backend**: Python (FastAPI or custom server)
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **API Integration**: RetellAI
 
 ## Project Structure
 ```
@@ -35,7 +42,7 @@ service-phone-agent/
    ```powershell
    cd backend
    ```
-2. Install required Python packages (create a `requirements.txt` if needed):
+2. Install required Python packages:
    ```powershell
    pip install -r requirements.txt
    ```
@@ -61,6 +68,10 @@ service-phone-agent/
 ## Usage
 - Access the frontend at `http://localhost:3000` after starting the Next.js server.
 - The backend should be running to handle API requests from the frontend.
+
+## RetellAI Integration
+- Follow the RetellAI documentation to connect your agent:
+  https://docs.retellai.com/integrate-llm/setup-websocket-server#step-3-test-your-basic-agent-on-dashboard
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
